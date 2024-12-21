@@ -4,6 +4,9 @@ name: ETL to supabase
 on:
   schedule:
     - cron: "0 2 * * *"  # Runs at 2am UTC every day
+  push:
+    branches:
+      - 'main'
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:

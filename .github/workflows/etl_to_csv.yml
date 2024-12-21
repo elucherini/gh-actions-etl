@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: "0 2 * * *"  # Runs at 2am UTC every day
   workflow_dispatch:  # Allows manual triggering of the workflow
+  push:
+    branches:
+      - 'main'
 
 jobs:
   csv-etl:
