@@ -3,7 +3,7 @@ name: SF Address Data to CSV ETL
 # Workflow triggers
 on:
   schedule:
-    - cron: "0 11 * * *"  # Runs every day at 11:00 UTC
+    - cron: "20 * * * *"  # Runs every hour at 20 minutes past the hour
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
 
       - name: Fetch and transform data
         run: |
-          python etl.py
+          python to_gh_artifact.py
 
       - name: Upload CSV artifact
         uses: actions/upload-artifact@v4
