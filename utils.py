@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Any, Dict, List
 import requests
+from datetime import datetime
 
 
 URL = "https://data.sfgov.org/resource/ramy-di5m.geojson"
@@ -16,6 +17,7 @@ class SFAddress:
     zip: str
     latitude: float
     longitude: float
+    created_at: str = datetime.now().isoformat()
 
 
 def fetch_data(url: str) -> Dict[str, Any] | None:
