@@ -25,7 +25,7 @@ jobs:
 
       - name: Fetch and transform data
         run: |
-          python to_gh_artifact.py
+          python src/to_gh_artifact.py
 
       - name: Upload CSV artifact
         uses: actions/upload-artifact@v4
