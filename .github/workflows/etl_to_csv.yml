@@ -1,0 +1,39 @@
+name: SF Address Data to CSV ETL
+
+# Workflow triggers
+on:
+  schedule:
+    - cron: "11 * * * *"  # Runs daily at 2:00 AM UTC
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  api-to-csv:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python 3.12
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # Step 4: Fetch and transform data
+      - name: Fetch and transform data
+        run: |
+          python etl.py
+
+      # Step 5: Upload the CSV as a workflow artifact
+      - name: Upload CSV artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: etl-address-data
+          path: output.csv
