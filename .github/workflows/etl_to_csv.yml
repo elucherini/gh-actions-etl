@@ -3,7 +3,7 @@ name: SF Address Data to CSV ETL
 # Workflow triggers
 on:
   schedule:
-    - cron: "20 * * * *"  # Runs every hour at 20 minutes past the hour
+    - cron: "0 2 * * *"  # Runs at 2am UTC every day
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
