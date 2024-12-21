@@ -1,4 +1,4 @@
-name: SF Address Data to Supabase ETL
+name: ETL to supabase
 
 # Workflow triggers
 on:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
-  api-to-csv:
+  supabase-etl:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,5 +24,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: ETL data to Supabase DB
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
           python to_supabase.py

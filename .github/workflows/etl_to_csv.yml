@@ -1,4 +1,4 @@
-name: SF Address Data to CSV ETL
+name: ETL to CSV
 
 # Workflow triggers
 on:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
-  api-to-csv:
+  csv-etl:
     runs-on: ubuntu-latest
 
     steps:
