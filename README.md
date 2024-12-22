@@ -3,21 +3,23 @@ A demonstration of a lightweight ETL with GitHub Actions.
 
 ## Introduction
 
-GitHub Actions provide an ideal and familiar setup to orchestrate ETLs for small project. This repo is a demo of a simple ETL (Extract-Tranform-Load) pipeline collecting data from the SFData project. It shows two data sinks:
+GitHub Actions provide a free/cheap and familiar setup to orchestrate ETLs for small project. This repo is a template for a simple ETL (Extract-Tranform-Load) pipeline collecting data from the [San Francisco Open Data](https://datasf.org/opendata/) project. The GitHub Actions included read and lightly parse data about San Francisco addresses, then they store it into two data sinks:
 
-- GitHub Artifacts: the processed data is stored as a CSV file in GitHub; ideal for test data or extremely small data.
-- External DB: stored into a Postgres DB hosted by Supabase for its ease of use.
+- GitHub Artifacts: the processed data is stored as a CSV file in GitHub; for the right amount of data, you don't need an external storage solution.
+- External DB: stored into a Postgres DB. In this demo, I chose Supabase for its ease of use.
 
 ## Motivation
 
-Manual runs and cron are great options as you start your ETL pipeline, but if you are looking into more flexibility for automating your pipeline, all of a sudden the cost of setup becomes too high. For example, Airflow is notorious for its steep setup curve. Other options such as Prefect aim at bridging that gap -- but if you want to get something to work quickly, or are processing small data, your best bet could be GitHub Actions.
+Most data pipelines process small data.
 
-GitHub Actions offer a reasonably flexible option to set up an ETL pipeline quickly and easily, especially if you only need limited computing and memory resources. If you don't care about the limited capacity and retention, you might even be able to even use GitHub for storage.
+Manual runs and cron are solid choices when you're just starting to develop your ETL pipeline. But if you are looking for more flexibility for automating the process, the setup complexity can quickly become overwhelming. Airflow, for instance, is notorious for its steep setup curve. Alternatives like Prefect aim at bridging that gap -- but if your priority is to get something up and running quickly and you are working with small data, GitHub Actions might be your best option.
+
+GitHub Actions offer a reasonably flexible and straightforward solution to set up an ETL pipeline, especially if your computing and memory requirements are low. If you don't care about the limited capacity and retention, you might even be able to  store in GitHub itself.
 
 ## Demo setup
 
 - Create a new repo and use this one as a template.
-- Navigate to Actions. You'll see two Workflows: ETL to CSV and ETL to Supabase.
+- Navigate to Actions. You'll see two workflows: ETL to CSV and ETL to Supabase.
 
 ### GitHub Artifacts as the data sink
 
@@ -38,7 +40,7 @@ on:
 
 ### External DB as the data sink
 
-You can use this template with any other externally hosted DB, however for the sake of this tutorial you'll have to create and connect Supabase database, as I wrote the DB connection using the supabase API for simplicity. 
+You can use this template with any externally hosted DB. To run the GitHub action as is, you'll have to create and connect Supabase database. 
 
 #### Create a table with Supabase
 
@@ -57,13 +59,13 @@ CREATE TABLE sf_addresses (
 );
 ```
 
-Check that your table has been created successfully.
+Check that your table has been created successfully by querying it, or navigating to the Table Editor.
 
 #### Connect GitHub Actions to your supabase DB
 
-You'll want to add `SUPABASE_KEY` and `SUPABASE_URL` to your [GitHub secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository). You can obtain them from your Supabase Home page, then scrolling down to Project API.
+You'll want to add `SUPABASE_KEY` and `SUPABASE_URL` to your [GitHub secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository). You can obtain them from your Supabase Home page, scrolling down to Project API.
 
-Then, navigate to your GitHub repo > Settings > under Security: Secrets and Variables > Actions. Click on New repository secret and add the two secrets, making sure to name them *exactly* `SUPABASE_URL` and `SUPABASE_KEY`.
+To add them to your repo, navigate to your GitHub repo > Settings > under Security: Secrets and Variables > Actions. Click on New repository secret and add the two secrets, making sure to name them *exactly* `SUPABASE_URL` and `SUPABASE_KEY`.
 
 
 #### Run the GitHub action
