@@ -70,7 +70,7 @@ Then, navigate to your GitHub repo > Settings > under Security: Secrets and Vari
 
 Now you can run your action: click on ETL to supabase > Re-run all jobs. 
 
-By default, the ETL runs every day at 2 a.m. UTC. It also runs whenever you push to the repo (for debugging purposes), or whenever you manually trigger it. To disable any of these behaviors, comment out the relevant portion of `.github/workflows/etl_to_supabase.yml`. See the [GitHub Artifacts setup](#markdown-header-github-artifacts-as-the-data-sink) for more details on how to change this file.
+By default, the ETL runs every day at 2 a.m. UTC. It also runs whenever you push to the repo (for debugging purposes), or whenever you manually trigger it. To disable any of these behaviors, comment out the relevant portion of `.github/workflows/etl_to_supabase.yml`. See the [GitHub Artifacts setup](#github-artifacts-as-the-data-sink) for more details on how to change this file.
 
 ## Considerations
 
@@ -78,7 +78,7 @@ This workflow is a great starter option, but it has several scalability limits.
 
 ### Compute limitations
 
-At the time of this writing, the [Free tier](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories) will get your public repo a 4-core Linux machine with 16 GB of RAM and 16 GB of SSD storage. The default GitHub-hosted runner does not allow you to run large-scale distributed workflows. [https://docs.github.com/en/actions/using-github-hosted-runners/using-larger-runners](Larger runners) are available at a cost. Self-hosting compute is an option, too, but at that point you might want to consider alternatives.
+At the time of this writing, the [Free tier](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories) will get your public repo a 4-core Linux machine with 16 GB of RAM and 16 GB of SSD storage. The default GitHub-hosted runner does not allow you to run large-scale distributed workflows. [Larger runners](https://docs.github.com/en/actions/using-github-hosted-runners/using-larger-runners) are available at a cost. Self-hosting compute is an option, too, but at that point you might want to consider alternatives.
 
 Keep in mind the [extra usage limits](https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration#usage-limits), too.
 
